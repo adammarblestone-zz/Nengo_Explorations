@@ -21,13 +21,13 @@ with model:
 
     # Create an input signal
     input = nengo.Node(piecewise({0: [1, 0], 0.1: [0, 0]}), label="input")
-
+    
     # Connect the input signal to the neural ensemble
     nengo.Connection(input, neurons)
 
     # Create the feedback connection
     nengo.Connection(neurons, neurons, transform=[[1, 1], [-1, 1]], synapse=0.1)
-
+    
     input_probe = nengo.Probe(input, 'output')
     neuron_probe = nengo.Probe(neurons, 'decoded_output', synapse=0.1)
     
