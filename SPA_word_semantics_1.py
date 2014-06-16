@@ -28,17 +28,19 @@ def main():
     with model:
         
         # Dimensionality of each representation
-        num_dimensions = 1
-        sub_dimensions = 1
+        num_dimensions = 2
+        sub_dimensions = 2
         
         # Create the vocabulary
         vocab = Vocabulary(num_dimensions, randomize = False)
         
         # Form the inputs
-        stored_value_1 = [0.6/np.sqrt((0.6**2) * num_dimensions)] * num_dimensions
+        stored_value_1 = [1] * num_dimensions
+        stored_value_1 = [s/np.linalg.norm(stored_value_1) for s in stored_value_1]
         vocab.add("Stored_value_1", stored_value_1)
         
-        stored_value_2 = [(-1**i)*0.6/np.sqrt((0.6**2) * num_dimensions) for i in range(num_dimensions)]
+        stored_value_2 = [(-1**i) for i in range(num_dimensions)]
+        stored_value_2 = [s/np.linalg.norm(stored_value_2) for s in stored_value_2]
         vocab.add("Stored_value_2", stored_value_2)
                 
         def first_input(t):
@@ -54,8 +56,8 @@ def main():
                 return "Stored_value_2"
                 
         # Buffers to store the input
-        model.buffer1 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions, neurons_per_dimension = 150)
-        model.buffer2 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions, neurons_per_dimension = 150)
+        model.buffer1 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions, neurons_per_dimension = 200, direct = True)
+        model.buffer2 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions, neurons_per_dimension = 200, direct = True)
         
         # Probe to visualize the values stored in the buffers
         buffer_1_probe = nengo.Probe(model.buffer1.state.output)
@@ -67,7 +69,7 @@ def main():
         
 
         # Buffer to store the output
-        model.buffer3 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions, neurons_per_dimension = 150)
+        model.buffer3 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions, neurons_per_dimension = 200, direct = True)
         buffer_3_probe = nengo.Probe(model.buffer3.state.output)
         
         # Control system
@@ -92,6 +94,9 @@ def main():
         plt.plot(sim.trange(), similarity(sim.data, buffer_1_probe, vocab), label = "Buffer 1 Value") # Plot the entire dataset so far
         plt.plot(sim.trange(), similarity(sim.data, buffer_2_probe, vocab), label = "Buffer 2 Value")
         plt.plot(sim.trange(), similarity(sim.data, buffer_3_probe, vocab), label = "Buffer 3 Value")
+        print sim.data[buffer_1_probe][-1]
+        print sim.data[buffer_2_probe][-1]
+        print sim.data[buffer_3_probe][-1]
         plt.legend(vocab.keys * 3, loc = 2)
         plt.draw() # Re-draw
     
