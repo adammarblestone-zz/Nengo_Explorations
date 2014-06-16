@@ -71,7 +71,7 @@ def main():
         buffer_3_probe = nengo.Probe(model.buffer3.state.output)
         
         # Control system
-        actions = spa.Actions('dot(buffer1, Stored_value_2) --> buffer3=Stored_value_2', 'dot(buffer1, Stored_value_1) --> buffer3=Stored_value_1-Stored_value_2')
+        actions = spa.Actions('dot(buffer1, Stored_value_2) --> buffer3=Stored_value_2', 'dot(buffer1, Stored_value_1) --> buffer3=Stored_value_1+Stored_value_2')
         model.bg = spa.BasalGanglia(actions)
         model.thalamus = spa.Thalamus(model.bg)
 
