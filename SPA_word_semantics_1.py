@@ -48,8 +48,8 @@ def main():
             return "Zero"
 
         # Buffers to store the input
-        model.buffer1 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions)
-        model.buffer2 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions)
+        model.buffer1 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions, neurons_per_dimension = 250)
+        model.buffer2 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions, neurons_per_dimension = 250)
         
         # Probe to visualize the values stored in the buffers
         buffer_1_probe = nengo.Probe(model.buffer1.state.output)
@@ -60,7 +60,7 @@ def main():
         model.input = spa.Input(buffer2 = second_input)
         
         # Buffer to store the output
-        model.buffer3 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions)
+        model.buffer3 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions, neurons_per_dimension = 250)
         buffer_3_probe = nengo.Probe(model.buffer3.state.output)
         
         # Control system
@@ -84,7 +84,7 @@ def main():
         plt.plot(sim.trange(), sim.data[buffer_1_probe], label = "Buffer 1 Value") # Plot the entire dataset so far
         plt.plot(sim.trange(), sim.data[buffer_2_probe], label = "Buffer 2 Value")
         plt.plot(sim.trange(), sim.data[buffer_3_probe], label = "Buffer 3 Value")
-        plt.legend()
+        plt.legend(loc = 2)
         plt.draw() # Re-draw
     
 if __name__ == '__main__':
