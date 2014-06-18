@@ -67,7 +67,6 @@ def main():
         model.input = spa.Input(buffer1 = first_input)
         model.input = spa.Input(buffer2 = second_input)
         
-
         # Buffer to store the output
         model.buffer3 = spa.Buffer(dimensions = num_dimensions, subdimensions = sub_dimensions, neurons_per_dimension = 200, direct = True)
         buffer_3_probe = nengo.Probe(model.buffer3.state.output)
