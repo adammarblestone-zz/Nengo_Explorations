@@ -1,0 +1,64 @@
+Adam-Marblestones-MacBook-Pro:Nengo_Explorations adammarblestone$ python SPA_word_semantics_3.py 
+Loading Word2Vec model...
+This program uses an SPA network in Nengo to perform vector operations on a semantically structured word-vector space *learned* from a sentence corpus.
+When trained on a large corpus of English sentences, for example, it should produce: Vector[king] - Vector[man] + Vector[woman] = Vector[king]
+For now, it just does subtraction...
+
+Press <tab> twice to see all your autocomplete options.
+_______________________________________________________
+
+First word:> seroton
+serotonergic                serotonin(2C)               serotonin-2C                serotonin-positive          serotonin2
+serotonergic)               serotonin)                  serotonin-3                 serotonin-related           serotonin2A
+serotonergic,               serotonin,                  serotonin-containing        serotonin-releasing         serotonin2A/2C
+serotonergic.               serotonin-                  serotonin-dependent         serotonin-reuptake          serotonin3
+serotonergic/cholinergic    serotonin-,                 serotonin-depleted          serotonin-synthesizing      serotonin4
+serotonin                   serotonin-1                 serotonin-immunoreactive    serotonin.                  serotonin;
+serotonin's                 serotonin-1A                serotonin-immunoreactivity  serotonin/noradrenaline     serotoninergic
+serotonin(1A)               serotonin-1B                serotonin-induced           serotonin/substance         serotoninergic,
+serotonin(1B)               serotonin-1C                serotonin-like              serotonin1A                 
+serotonin(2)                serotonin-2                 serotonin-mediated          serotonin1A,                
+serotonin(2A)               serotonin-2A                serotonin-norepinephrine    serotonin1B                 
+
+First word:> serotonin
+
+Second word:> dopamine
+
+What the Nengo model SHOULD return is something like: serotonin-norepinephrine
+
+Defining SPA network...
+Time: 0.499000
+
+What the Nengo model DID return is something like: 69.2%
+
+
+Time: 0.999000
+
+What the Nengo model DID return is something like: 69.2%
+
+
+Time: 1.499000
+
+What the Nengo model DID return is something like: inhibitors
+
+
+Time: 1.999000
+
+What the Nengo model DID return is something like: Polycystic
+
+
+Time: 2.499000
+
+What the Nengo model DID return is something like: serotonin-norepinephrine
+
+
+Time: 2.999000
+
+What the Nengo model DID return is something like: serotonin-norepinephrine
+
+
+Time: 3.499000
+
+What the Nengo model DID return is something like: serotonin-norepinephrine
+
+Adam-Marblestones-MacBook-Pro:Nengo_Explorations adammarblestone$ 

@@ -1,0 +1,49 @@
+Adam-Marblestones-MacBook-Pro:Nengo_Explorations adammarblestone$ python SPA_word_semantics_3.py 
+Loading Word2Vec model...
+This program uses an SPA network in Nengo to perform vector operations on a semantically structured word-vector space *learned* from a sentence corpus.
+When trained on a large corpus of English sentences, for example, it should produce: Vector[king] - Vector[man] + Vector[woman] = Vector[king]
+For now, it just does subtraction...
+
+Press <tab> twice to see all your autocomplete options.
+_______________________________________________________
+
+First word:> serotonin
+
+Second word:> dopamine
+
+What the Nengo model SHOULD return is something like: ssris
+
+Defining SPA network...
+Time: 0.499000
+
+What the Nengo model DID return is something like: women
+
+
+Time: 0.999000
+
+What the Nengo model DID return is something like: women
+
+
+Time: 1.499000
+
+What the Nengo model DID return is something like: ssris
+
+
+Time: 1.999000
+
+What the Nengo model DID return is something like: ssris
+
+
+Time: 2.499000
+
+What the Nengo model DID return is something like: inhibitors
+
+
+Time: 2.999000
+
+What the Nengo model DID return is something like: inhibitors
+
+
+Time: 3.499000
+
+What the Nengo model DID return is something like: inhibitors
