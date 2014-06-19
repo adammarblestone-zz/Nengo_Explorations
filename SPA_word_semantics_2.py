@@ -99,38 +99,28 @@ def main():
         # Connect up the inputs
         model.input = spa.Input(control = control_input, word_buffer1 = first_input, word_buffer2 = second_input, word_buffer3 = third_input)
         
-        '''
-        # Cleanup the output
-        n_cleanup_neurons = 20 # number of neurons per item in vocabulary
-        model.associative_memory = AssociativeMemory(input_vocab = vocab, n_neurons_per_ensemble = n_cleanup_neurons, threshold = 0.3)
-
-        model.cleanup_result = spa.Buffer(dimensions = num_dimensions, subdimensions = 1, neurons_per_dimension = 50, vocab = vocab)
-
-        # Connect up the cleanup memory
-        nengo.Connection(model.result.state.output, model.associative_memory.input)
-        nengo.Connection(model.associative_memory.output, model.cleanup_result.state.input)
-
-        # And probe it
-        cleanup_probe = nengo.Probe(model.cleanup_result.state.output)
-        '''
-        
     # Start the simulator
     sim = nengo.Simulator(model)
-    sim.run(4) # Run for an additional 1 second
     
+    # Dynamic plotting
+    plt.ion() # Dynamic updating of plots
     fig = plt.figure(figsize=(15,8))
+    plt.show()
     ax = fig.gca()
-    ax.set_title("Control Input")
-    plt.plot(sim.trange(), np.abs(similarity(sim.data, control_probe, vocab)), label = "Control value")
-    plt.legend(vocab.keys * 3, loc = 2)
-    plt.ylim(-1.1, 1.1)
-    
-    
-    fig = plt.figure(figsize=(15,8))
-    ax = fig.gca()
-    ax.set_title("Result")
-    plt.plot(sim.trange(), similarity(sim.data, result_probe, vocab), label = "Result value")
-    plt.legend(vocab.keys * 3, loc = 2)
+    ax.set_title("Vector Storage")
+
+    while True:
+        sim.run(1) # Run for an additional 1 second
+        plt.clf() # Clear the figure
+        plt.plot(sim.trange(), similarity(sim.data, result_probe, vocab), label = "Buffer 3 Value")
+        plt.legend(vocab.keys * 3, loc = 2)
+        plt.draw() # Re-draw
+        
+        print sim.data[buffer_1_probe][-1]
+        print sim.data[buffer_2_probe][-1]
+        print sim.data[buffer_3_probe][-1]
+        print sim.data[result_probe][-1]
+        print "\n"
         
     plt.show()
     
